@@ -8,7 +8,7 @@ pipeline {
     }
     environment {
         ANSIBLE_CMD='/usr/local/bin/ansible'
-        PLAYBOOK_DIR='plays/'
+        PLAYBOOK_DIR='plays'
     }
     parameters {
         booleanParam(
