@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: False
+  tasks:
+    - name: Wait for all servers to become reachable over SSH
+      wait_for_connection:
+        timeout: 60
+        delay: 5
+        sleep: 10

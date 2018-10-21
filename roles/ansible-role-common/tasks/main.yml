@@ -1,0 +1,10 @@
+---
+# tasks file for ansible-role-common
+
+- include: debian.yml
+  when:
+    ansible_os_family == "Debian"
+
+- include: rhel.yml
+  when:
+    ansible_os_family == "RedHat"
