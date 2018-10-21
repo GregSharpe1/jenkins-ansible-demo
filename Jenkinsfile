@@ -32,9 +32,8 @@ pipeline {
         }
         stage('Check ENV') {
             steps {
-                 script {
+                script {
                     run_ansible_playbook('${PLAYBOOK_DIR}/check_env_reachable.yml')
-                    }
                 }
             }
         }
