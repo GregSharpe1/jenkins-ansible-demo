@@ -68,8 +68,8 @@ void run_ansible_playbook(playbook) {
         // fa == root ansible key
         credentialsId: "jenkins-demo-key",
         installation: "ansible2.7",
-        extraVars: [
-        ],
-        // extras: ('-vvv'),
+        // extraVars: [
+        // ],
+        extras: ('-vvv'),
     )
 }
