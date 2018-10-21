@@ -1,0 +1,16 @@
+[defaults]
+inventory = inventory/
+roles_path = roles
+become_user = root
+become_method = sudo
+remote_user = ubuntu
+
+# Merge hashes together
+hash_behaviour = merge
+# Override the "Managed by" line for templates to reduce the chances of changes
+# being made to files when run by different people on different machines.
+ansible_managed = DO NOT EDIT - Managed by Ansible
+
+[ssh_connection]
+ssh_args = -F ssh_config
+scp_if_ssh = True
