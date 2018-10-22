@@ -28,6 +28,7 @@ pipeline {
             steps {
                 // Just checking that we've got ansible installed.
                 sh '${ANSIBLE_CMD} --version'
+                run_ansible_playbook('${PLAYBOOK_DIR}/python_install.yml')
             }
         }
         stage('Check ENV') {
