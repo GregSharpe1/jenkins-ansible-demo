@@ -50,11 +50,20 @@ pipeline {
                 }
             }
         }
-        // stage('Parallel Ansible') {
-        //     parallel {
-                
-        //     }
-        // }
+        stage('Parallel Ansible') {
+            parallel {
+                stage('Fail2ban') {
+                    steps {
+                        run_ansible_playbook('${PLAYBOOK_DIR}/fail2ban.yml')
+                    }
+                }
+                stage('Logrotate') {
+                    steps {
+                        run_ansible_playbook('${PLAYBOOK_DIR}/logrotate.yml')
+                    }
+                }
+            }
+        }
     }
 }
 
