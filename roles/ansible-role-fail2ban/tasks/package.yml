@@ -1,0 +1,19 @@
+---
+
+- name: RedHat | install epel-release repository
+  yum:
+    name: epel-release
+    state: installed
+  when: ansible_os_family == 'RedHat' and ansible_distribution != 'Fedora'
+
+- name: Install current/latest Fail2Ban version
+  package:
+    name: fail2ban
+    state: '{{ fail2ban_pkg_state }}'
+  when: not fail2ban_pkg_version
+
+- name: Install specific Fail2Ban version
+  package:
+    name: 'fail2ban{{ fail2ban_pkg_version }}'
+    state: present
+  when: fail2ban_pkg_version is not none
