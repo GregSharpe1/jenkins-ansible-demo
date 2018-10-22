@@ -1,5 +1,7 @@
 #!groovy
 
+def deploy_app_userInput
+
 pipeline {
     agent any
     options {
@@ -65,6 +67,26 @@ pipeline {
                 stage('Nginx') {
                     steps {
                         run_ansible_playbook('${PLAYBOOK_DIR}/nginx.yml')
+                    }
+                }
+            }
+        }
+        stage('Who you like to run app deployment?') {
+            steps {
+                script {
+                    deploy_app_userInput = input(id: 'confirm',
+                    message: 'Run Ansible?',
+                    parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Would you like to run Ansible?', name: 'confirm'] ])
+                }
+            }
+        }
+        stage('App Deployment') {
+            steps {
+                script {
+                    if (deploy_app_userInput == true) {
+                        build job: 'JenkinsAppDeploymentStepDemo'
+                    } else {
+                        echo "Skipping ansible run."
                     }
                 }
             }
