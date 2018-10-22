@@ -43,6 +43,7 @@ pipeline {
                     echo "Basebuild run here"
                     run_ansible_playbook('${PLAYBOOK_DIR}/base.yml')
                 }
+            slackSend "Successfully run the base build against demo env."
             }
         }
         stage('Parallel Ansible') {
@@ -77,6 +78,7 @@ pipeline {
             steps {
                 script {
                     if (deploy_app_userInput == true) {
+                        slackSend "Deploying the web app."
                         build job: 'JenkinsAppDeploymentStepDemo'
                     } else {
                         echo "Skipping ansible run."
