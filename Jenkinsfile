@@ -33,13 +33,6 @@ pipeline {
                 run_ansible_playbook('${PLAYBOOK_DIR}/python_install.yml')
             }
         }
-        stage('Check ENV') {
-            steps {
-                script {
-                    run_ansible_playbook('${PLAYBOOK_DIR}/check_env_reachable.yml')
-                }
-            }
-        }
         stage('Base build') {
             when {
                 expression{params.basebuild ==~ /(?i)(Y|YES|T|TRUE|ON)/}
@@ -76,7 +69,7 @@ pipeline {
                 script {
                     deploy_app_userInput = input(id: 'confirm',
                     message: 'Run Ansible?',
-                    parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Would you like to run Ansible?', name: 'confirm'] ])
+                    parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Would you like to deploy all applications?', name: 'confirm'] ])
                 }
             }
         }
