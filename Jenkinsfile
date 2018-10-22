@@ -62,6 +62,11 @@ pipeline {
                         run_ansible_playbook('${PLAYBOOK_DIR}/logrotate.yml')
                     }
                 }
+                stage('Nginx') {
+                    steps {
+                        run_ansible_playbook('${PLAYBOOK_DIR}/nginx.yml')
+                    }
+                }
             }
         }
     }
